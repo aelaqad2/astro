@@ -1,0 +1,99 @@
+---
+const pageTitle = 'My First Blog Post';
+const publishedDate = '2024-12-01';
+const author = 'Geoff Graham';
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>{pageTitle}</title>
+    <style>
+      body {
+        background-color: #f0f4f8;
+        font-family: sans-serif;
+        padding: 2rem;
+        color: #111;
+        max-width: 800px;
+        margin: 0 auto;
+      }
+
+      nav a {
+        margin-right: 1rem;
+        text-decoration: none;
+        color: purple;
+        font-weight: bold;
+      }
+
+      h1 {
+        font-size: 2.5rem;
+        font-weight: bold;
+        margin-top: 1.5rem;
+      }
+
+      h2 {
+        margin-top: 2rem;
+        font-size: 1.5rem;
+      }
+
+      ol {
+        margin-top: 1rem;
+        padding-left: 1.5rem;
+      }
+
+      li {
+        margin-bottom: 1rem;
+      }
+
+      strong {
+        font-weight: bold;
+      }
+
+      footer {
+        margin-top: 2rem;
+      }
+
+      footer a {
+        margin-right: 1rem;
+        text-decoration: none;
+        color: blue;
+      }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <a href="/">HOME</a>
+      <a href="/about/">ABOUT</a>
+      <a href="/blog/">BLOG</a>
+    </nav>
+
+    <h1>{pageTitle}</h1>
+    <p>Published on: {publishedDate}</p>
+    <p>Written by {author}</p>
+
+    <h2>What I have accomplished</h2>
+    <ol>
+      <li>
+        <strong>Installing Astro:</strong> First, I created a new Astro project and set up my online accounts.
+      </li>
+      <li>
+        <strong>Making Pages:</strong> I then learned how to make pages by creating new <code>.astro</code> files and placing them in the <code>src/pages/</code> folder.
+      </li>
+      <li>
+        <strong>Making Blog Posts:</strong> This is my first blog post! I now have Astro pages and Markdown posts!
+      </li>
+    </ol>
+
+    <h2>What is next</h2>
+    <p>
+      I will finish the Astro tutorial, and then keep adding more posts. Watch this space for more to come.
+    </p>
+
+    <footer>
+      <a href="https://twitter.com">twitter</a>
+      <a href="https://github.com">github</a>
+      <a href="https://youtube.com">youtube</a>
+    </footer>
+  </body>
+</html>

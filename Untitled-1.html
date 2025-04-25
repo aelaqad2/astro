@@ -1,0 +1,53 @@
+---
+const pageTitle = 'My Astro Site';
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width" />
+    <title>{pageTitle}</title>
+    <style>
+      body {
+        background-color: #f0f4f8;
+        font-family: sans-serif;
+        padding: 2rem;
+        color: #111;
+      }
+
+      nav a,
+      footer a {
+        margin-right: 1rem;
+        text-decoration: none;
+        color: purple;
+      }
+
+      h1 {
+        font-size: 2.5rem;
+        font-weight: bold;
+        margin-top: 1rem;
+      }
+
+      footer {
+        margin-top: 1rem;
+      }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <a href="/">Home</a>
+      <a href="/about/">About</a>
+      <a href="/blog/">Blog</a>
+    </nav>
+
+    <main>
+      <h1>{pageTitle}</h1>
+      <footer>
+        <a href="https://twitter.com">twitter</a>
+        <a href="https://github.com">github</a>
+        <a href="https://youtube.com">youtube</a>
+      </footer>
+    </main>
+  </body>
+</html>

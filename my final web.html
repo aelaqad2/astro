@@ -1,0 +1,194 @@
+ const express = require('express');
+const nodemailer = require('nodemailer');
+const multer = require('multer');
+const bodyParser = require('body-parser');
+const path = require('path');
+const url = require('url');
+
+const app = express();
+const port = 3000;
+
+// Middleware to parse JSON and URL-encoded data
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+
+// Set up file upload (store uploaded files in the 'uploads' folder)
+const upload = multer({ dest: 'uploads/' });
+
+// Serve the HTML file
+app.get('/', (req, res) => {
+    res.send(`
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Brotherhood Contracting</title>
+        <style>
+            body {
+                background-color: lightgrey;
+                font-family: Arial, sans-serif;
+                margin: 0;
+                padding: 0;
+            }
+            h1 {
+                text-align: center;
+            }
+            h2 {
+                color: white;
+            }
+            .mission {
+                font-size: 1.2em;
+                margin: 20px;
+                text-align: center;
+            }
+            .container {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                padding: 20px;
+            }
+            .service, .contact-info {
+                flex: 1 1 300px;
+                margin: 10px;
+                padding: 15px;
+                background-color: white;
+                border-radius: 5px;
+                box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            }
+            table {
+                width: 100%;
+                border-collapse: collapse;
+                margin: 20px 0;
+            }
+            th, td {
+                border: 1px solid black;
+                padding: 8px;
+                text-align: left;
+            }
+            form {
+                margin: 20px 0;
+            }
+            input, select, textarea {
+                width: 100%;
+                padding: 8px;
+                margin: 5px 0;
+            }
+            button {
+                padding: 10px 15px;
+                background-color: #007BFF;
+                color: white;
+                border: none;
+                cursor: pointer;
+            }
+            button:hover {
+                background-color: #0056b3;
+            }
+            @media (max-width: 600px) {
+                .container {
+                    flex-direction: column;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Brotherhood Contracting</h1>
+        <h2>Our Mission</h2>
+        <h3 class="mission">At Brotherhood Contracting, our mission is to redefine the construction experience through unparalleled excellence. Based in Mesa, AZ, we are dedicated to delivering superior contracting services across residential and commercial projects. Our commitment to quality workmanship and customer satisfaction drives us to provide reliable, innovative, and efficient solutions that exceed expectations. We don't just build structures; we build trust and relationships, ensuring every project is a testament to our dedication and expertise.</h3>
+
+        <p>At <a href="http://google.com" target="_blank">Brotherhood Contracting</a></p>
+
+        <div class="container">
+            <div class="service">
+                <h3>Our Services</h3>
+                <ul>
+                    <li>Remodels</li>
+                    <li>Framing</li>
+                    <li>Drywall</li>
+                </ul>
+            </div>
+
+            <div class="contact-info">
+                <h3>Contact Information</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Number</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Emad Elaqad</td>
+                            <td>Emaddeya@gmail.com</td>
+                            <td>(480)-616-3985</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <hr>
+
+        <h3>Contact Us</h3>
+        <form id="contact-form" action="/submit-form" method="POST" enctype="multipart/form-data">
+            <div>
+                <label for="first-name">First Name:</label>
+                <input type="text" name="firstName" id="first-name" required>
+            </div>
+            <div>
+                <label for="last-name">Last Name:</label>
+                <input type="text" name="lastName" id="last-name" required>
+            </div>
+            <div>
+                <label for="email">Email:</label>
+                <input type="email" name="email" id="email" required>
+            </div>
+            <div>
+                <label for="message">Message:</label>
+                <textarea name="message" id="message" required></textarea>
+            </div>
+            <div>
+                <label for="gender">Gender:</label>
+                <select name="gender" id="gender" required>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                    <option value="other">Other</option>
+                </select>
+            </div>
+            <div>
+                <label for="age">Age:</label>
+                <input type="number" name="age" id="age" value="30" required>
+            </div>
+            <div>
+                <label for="birthday">Birthday:</label>
+                <input type="date" name="birthday" id="birthday" required>
+            </div>
+            <div>
+                <label for="file">Upload a File:</label>
+                <input type="file" name="file" id="file">
+            </div>
+            <input type="submit" value="Submit">
+        </form>
+
+        <button onclick="handleButtonClick()">Click Me</button>
+
+        <script>
+            function handleButtonClick() {
+                alert('Button Clicked!');
+            }
+
+            // Simple form validation
+            document.getElementById('contact-form').onsubmit = function(event) {
+                const firstName = document.getElementById('first-name').value.trim();
+                const lastName = document.getElementById('last-name').value.trim();
+                if (!firstName || !lastName) {
+                    alert('Please fill in both your first and last name.');
+                    event.preventDefault(); // Prevent form submission
+                }
+            };
+        </script>
+    </body>
+    </html>
+    
